@@ -18,16 +18,19 @@ var secret []byte
 
 // Declare the User type.
 type User struct {
-	Name string
-	Age  int
+	Name   string
+	Age    int
+	Course string
 }
-
-// Initialize the cookie as normal.
 
 func setCookieHandler(w http.ResponseWriter, r *http.Request) {
 	// Initialize a User struct containing the data that we want to store in the
 	// cookie.
-	user := User{Name: "Alice", Age: 21}
+	user := User{
+		Name:   "Nolan Lockwood",
+		Age:    22,
+		Course: "AINT",
+	}
 
 	// Initialize a buffer to hold the gob-encoded data.
 	var buf bytes.Buffer
@@ -118,7 +121,7 @@ func main() {
 	mux.HandleFunc("/get", getCookieHandler)
 
 	log.Print("Listening...")
-	err = http.ListenAndServe(":3000", mux)
+	err = http.ListenAndServe(":1981", mux)
 	if err != nil {
 		log.Fatal(err)
 	}
